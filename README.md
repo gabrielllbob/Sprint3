@@ -1,46 +1,99 @@
-# Sprint3
-Este projeto consiste em uma solução full-stack, com uma API construída em .NET e um frontend desenvolvido em Angular.
+# Projeto Full-Stack: API .NET e Frontend Angular
 
-📋 Pré-requisitos
-Certifique-se de ter instalado em sua máquina:
+Este projeto apresenta uma solução full-stack completa, composta por uma API robusta desenvolvida em **.NET** e um frontend dinâmico construído com **Angular**. A integração entre as duas partes permite uma aplicação web moderna e eficiente.
 
-.NET SDK
+## 📋 Pré-requisitos
 
-Node.js (para o Angular)
+Para configurar e executar este projeto em sua máquina local, certifique-se de ter os seguintes softwares instalados:
 
-MySQL Server
+*   **[.NET SDK](https://dotnet.microsoft.com/download)**: Necessário para compilar e executar a API .NET.
+*   **[Node.js](https://nodejs.org/en/download/)**: Essencial para o desenvolvimento e execução do frontend Angular, incluindo o gerenciador de pacotes `npm`.
+*   **[MySQL Server](https://dev.mysql.com/downloads/mysql/)**: O banco de dados utilizado para persistência de dados da aplicação.
 
-⚙️ Configuração do Banco de Dados
-Por padrão, a API está configurada para conectar a um servidor MySQL local na porta padrão.
+## 🚀 Repositórios do Projeto
 
-Caso seja necessário alterar as credenciais de conexão ao banco de dados:
+O projeto está dividido em dois repositórios distintos para a API e o Frontend:
 
-Acesse o arquivo appsettings.json localizado na pasta do projeto backend.
+*   **API (.NET)**: [https://github.com/gabrielllbob/Sprint3](https://github.com/gabrielllbob/Sprint3)
+*   **Frontend (Angular)**: [https://github.com/gabrielllbob/Sprint3_front](https://github.com/gabrielllbob/Sprint3_front)
 
-Localize a seção de ConnectionStrings.
+## ⚙️ Configuração e Execução da API (.NET)
 
-Altere o endereço, usuário e senha conforme o seu ambiente.
+### Configuração do Banco de Dados
 
-🚀 Como Rodar o Projeto
-Backend (API)
-Após configurar o banco de dados, navegue até a pasta da API e execute os comandos abaixo para preparar o banco e iniciar o servidor:
+Por padrão, a API está configurada para se conectar a um servidor MySQL local na porta padrão. As credenciais e o nome do banco de dados são definidos via `user-secrets`.
 
-Bash
-# Aplica as migrações ao banco de dados
-dotnet ef database update
+### Passos para Iniciar a API
 
-# Inicia a API
-dotnet run
-Frontend (Angular)
-Navegue até a pasta do frontend e execute o comando para iniciar a aplicação:
+1.  **Instalar a ferramenta `dotnet-ef` (se ainda não tiver):**
 
-Bash
-# Inicia o servidor de desenvolvimento e abre o navegador
-npx ng serve --open
-🌐 Deploy
-Status: O deploy/conexão via Vercel está em andamento (Work In Progress - WIP).
+    ```bash
+    dotnet tool install --global dotnet-ef
+    ```
 
-🛠 Tecnologias
-Backend: .NET (C#), Entity Framework Core, MySQL.
+2.  **Configurar as variáveis de ambiente para o JWT e a string de conexão do banco de dados:**
 
-Frontend: Angular, TypeScript.
+    ```bash
+    dotnet user-secrets set "JwtSettings:SecretKey" "GabrielLopesLimaPrecisaDeUmaBoaOportunidadeDeEmprego"
+    dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=localhost;Database=bancofraude;User=root;Password=cimatec;"
+    ```
+
+    > **Nota:** A `SecretKey` do JWT é crucial para a segurança da autenticação. Certifique-se de mantê-la segura e, em ambientes de produção, utilize um método mais robusto para gerenciamento de segredos.
+
+3.  **Aplicar as migrações do banco de dados:**
+
+    ```bash
+    dotnet ef database update
+    ```
+
+4.  **Executar a API:**
+
+    ```bash
+    dotnet run --launch-profile https
+    ```
+
+    A API estará disponível em `https://localhost:7151`.
+
+### Usuário Administrador Padrão
+
+Após a execução das migrações do banco de dados, um usuário administrador padrão é criado automaticamente. Utilize as seguintes credenciais para o primeiro acesso:
+
+*   **CPF/Login:** `00000000000`
+*   **Senha:** `123456`
+
+    > **Atenção:** Por questões de segurança, é altamente recomendável alterar a senha deste usuário após o primeiro login em um ambiente de produção.
+
+### Documentação da API (Swagger)
+
+Após iniciar a API, você pode acessar a documentação interativa do Swagger nos seguintes endereços:
+
+*   [http://localhost:5168/swagger/index.html](http://localhost:5168/swagger/index.html)
+*   [https://localhost:7151/swagger/index.html](https://localhost:7151/swagger/index.html)
+
+## 🌐 Configuração e Execução do Frontend (Angular)
+
+### Passos para Iniciar o Frontend
+
+1.  **Instalar as dependências do projeto:**
+
+    Navegue até o diretório do frontend e execute:
+
+    ```bash
+    npm install
+    ```
+
+2.  **Executar o servidor de desenvolvimento e abrir no navegador:**
+
+    ```bash
+    npx ng serve --open
+    ```
+
+    O aplicativo Angular será compilado e aberto automaticamente em seu navegador padrão, geralmente em `http://localhost:4200`.
+
+## ☁️ Versão Publicada do Frontend
+
+Uma versão do frontend também está disponível online, acessível através do seguinte link:
+
+*   [https://sprint3-front-beta.vercel.app/](https://sprint3-front-beta.vercel.app/)
+
+---
